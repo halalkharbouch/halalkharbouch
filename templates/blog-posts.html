@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+
+
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Posts</title>
+    <meta name='robots' content='max-image-preview:large' />
+    <link rel='dns-prefetch' href='http://fonts.googleapis.com/' />
+
+
+        <link rel="apple-touch-icon" sizes="180x180" href="../static/images/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/../static/images/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../static/images/favicon/favicon-16x16.png">
+<link rel="manifest" href="../static/images/favicon/site.webmanifest">
+
+
+
+    <link rel='stylesheet' id='wp-block-library-css'
+        href='../static/css/other/block-library/style.min3781.css?ver=6.2.2' media='all' />
+
+    <link rel='stylesheet' id='classic-theme-styles-css' href='../static/css/classic-themes.min3781.css?ver=6.2.2'
+        media='all' />
+
+    <link rel='stylesheet' id='contact-form-7-css'
+        href='../static/plugins/contact-form-7/includes/css/styles41a3.css?ver=5.8' media='all' />
+    <link rel='stylesheet' id='redux-extendify-styles-css'
+        href='../static/plugins/redux-framework/redux-core/assets/css/extendify-utilities4235.css?ver=4.4.5'
+        media='all' />
+    <link rel='stylesheet' id='icon-css' href='../static/css/iconoir3781.css?ver=6.2.2' media='all' />
+    <link rel='stylesheet' id='bootstrap-css' href='../static/css/bootstrap.min3781.css?ver=6.2.2' media='all' />
+    <link rel='stylesheet' id='aos-css' href='../static/css/aos3781.css?ver=6.2.2' media='all' />
+    <link rel='stylesheet' id='gridx-style-css' href='../static/css/style3781.css?ver=6.2.2' media='all' />
+    <link rel='stylesheet' id='gridx-unit-test-css' href='../static/css/gridx-unit-test3781.css?ver=6.2.2'
+        media='all' />
+    <link rel='stylesheet' id='gridx-fonts-css'
+        href='http://fonts.googleapis.com/css?family=Inter%3A100%2C200%2C300%2C400%2C500%2C600%2C700%2C800%2C%26subset%3Dlatin%2Clatin-ext&amp;ver=1.0.0'
+        media='all' />
+    <script src='../static/js/jquery/jquery.min5aed.js?ver=3.6.4' id='jquery-core-js'></script>
+    <script src='../static/js/jquery/jquery-migrate.min6b00.js?ver=3.4.0' id='jquery-migrate-js'></script>
+
+
+</head>
+
+<body class="archive date elementor-default elementor-kit-16">
+
+
+    <main class="main-workdetails-page">
+
+        {% include "header.html" %}
+
+
+        <!-- Breadcrumb -->
+        <section class="breadcrumb-area">
+            <div class="container-fluid col-md-11 text-center">
+                <div class="breadcrumb-content" data-aos="fade-up">
+                    <p><a href="{{ url_for('home') }}">HOME - </a>ALL POSTS</p>
+                    {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                    <p class="alert alert-success">{{ messages[0] }}</p>
+                    {% endif %}
+                    {% endwith %}
+                    <h1 class="section-heading"><img src="../static/images/star-2.png" alt="Star"> ALL POSTS<img
+                            src="../static/images/star-2.png" alt="Star"></h1>
+                </div>
+            </div>
+        </section>
+        <!-- End Breadcrumb -->
+
+
+        <!-- Blog Items -->
+        <section class="blog-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-11 offset-md-1">
+                        <div class="blog-items">
+
+                            {% for post in all_posts %}
+                            <div id="post-3207"
+                                class="post-3207 post type-post status-publish format-standard has-post-thumbnail hentry category-uncategorized tag-developement tag-sass">
+
+                                <div class="blog-item" data-aos="zoom-in">
+                                    <div class="img-box">
+
+                                        <img width="667" height="400" src="{{ post.image_url }}"
+                                            class="attachment-gridx-Blog size-gridx-Blog wp-post-image" alt="image"
+                                            decoding="async" sizes="(max-width: 667px) 100vw, 667px" />
+                                    </div>
+                                    <div class="content">
+                                        <span class="meta">{{ post.date }}</span>
+                                        <p>Author: {{ post.author.name }}</p>
+                                        <h1><a href="{{ url_for('blog_post', post_id=post.id) }}">{{ post.title }}</a></h1>
+                                        <p>
+                                        <p>{{ post.snippet }}</p>
+                                        </p>
+                                        <a href="{{ url_for('blog_post', post_id=post.id) }}" class="theme-btn">Read More</a>
+                                        {% if current_user.id == 1 %}
+
+                                        <a href="{{ url_for('delete_post', post_id=post.id) }}" class="theme-btn btn text-right">Delete post</a>
+
+                                        {% endif %}
+
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+
+                        {% if current_user.id == 1 %}
+                                            <div class="text-right">
+                                        <a href="{{ url_for('new_post') }}" class="theme-btn text-right">Add Post</a>
+                                            </div>
+                                        {% endif %}
+
+
+
+
+                        </div>
+
+                        <!-- Pagination -->
+                        <div class="pagi-area">
+                        </div>
+                    </div>
+
+                    <!-- Start Sidebar -->
+
+                    <!-- End Start Sidebar -->
+                </div>
+            </div>
+            </div>
+        </section>
+        <!-- End Blog Items -->
+
+
+
+
+        </div>
+        </section>
+        {% include "footer.html" %}
+
+    </main>
+
+    <script src='../static/plugins/contact-form-7/includes/swv/js/index41a3.js?ver=5.8' id='swv-js'></script>
+    <script id='contact-form-7-js-extra'>
+
+    </script>
+    <script src='../static/plugins/contact-form-7/includes/js/index41a3.js?ver=5.8' id='contact-form-7-js'></script>
+    <script src='../static/js/bootstrap.bundle.min3781.js?ver=6.2.2' id='bootstrap-js'></script>
+    <script src='../static/js/aos3781.js?ver=6.2.2' id='aos-js'></script>
+    <script src='../static/js/main3781.js?ver=6.2.2' id='gridx-main-js'></script>
+    <script src='../static/js/ajax-form3781.html?ver=6.2.2' id='ajax-form-js'></script>
+</body>
+
+
+</html>
