@@ -152,7 +152,8 @@ def admin_only(f):
 
 @app.route('/', methods=['GET'])
 def home():
-    return render_template('index.html')
+    project_name = Project.query.all()[::-1][0].project_name.upper()
+    return render_template('index.html', project_name=project_name)
 
 @app.route('/register', methods=['POST', 'GET'])
 def register():
