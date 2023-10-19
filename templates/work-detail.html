@@ -333,7 +333,7 @@
                                                 </div>
                                                 <div class="right-details">
                                                     <h3>Description</h3>
-                                                    {{ project.project_description }}
+                                                    {{ project.project_description | safe }}
                                                 </div>
                                             </div>
                                         </div>
@@ -391,15 +391,15 @@
 
                                         <!-- Start Nextproject
     ============================================= -->
-
+                                        {% if current_user.id == 1 %}
                                         <div class="container d-flex align-items-center justify-content-center"
                                             data-aos="zoom-in">
-                                            <a href="{{ url_for('work_details', project_id=project.id + 1) }}" class="big-btn shadow-box">
+                                            <a href="{{ url_for('work_details', project_id=project.id - 1) }}" class="big-btn shadow-box">
                                                 Next Project </a>
 
                                         </div>
 
-                                        {% if current_user.id == 1 %}
+
                                         <div class="container d-flex align-items-center justify-content-center"
                                             data-aos="zoom-in">
                                             <a href="{{ url_for('delete_project', project_id=project.id) }}" class="big-btn shadow-box">

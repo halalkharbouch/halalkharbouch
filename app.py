@@ -66,7 +66,7 @@ class CreateProject(FlaskForm):
     about_client = TextAreaField("About Client", validators=[DataRequired()])
     project_year = IntegerField("Project Year", validators=[DataRequired()])
     about_project = TextAreaField("About Project", validators=[DataRequired()])
-    project_description = TextAreaField("Project Descrption", validators=[DataRequired()])
+    project_description = CKEditorField("Project Descrption", validators=[DataRequired()])
     img_url_1 = StringField("First Image Url", validators=[DataRequired(), URL()])
     img_url_2 = StringField("Second Image Url", validators=[DataRequired(), URL()])
     img_url_3 = StringField("Third Image Url", validators=[DataRequired(), URL()])
@@ -195,7 +195,7 @@ def about():
 
 @app.route('/works', methods=['GET'])
 def works():
-    projects = Project.query.all()
+    projects = Project.query.all()[::-1]
     return render_template('works.html', projects=projects)
 
 
@@ -204,7 +204,7 @@ def work_details():
     project_id = request.args.get('project_id')
     requested_project = Project.query.get(project_id)
     if requested_project is None:
-        requested_project = Project.query.get(1)
+        requested_project = Project.query.get(13)
     return render_template('work-detail.html', project=requested_project)
 
 @app.route('/services')
