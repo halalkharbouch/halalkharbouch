@@ -71,8 +71,8 @@ class CreateProject(FlaskForm):
     img_url_2 = StringField("Second Image Url", validators=[DataRequired(), URL()])
     img_url_3 = StringField("Third Image Url", validators=[DataRequired(), URL()])
     img_url_4 = StringField("Fourth Image Url", validators=[DataRequired(), URL()])
-    img_url_5 = StringField("Fifth Image Url", validators=[DataRequired(), URL()])
-    img_url_6 = StringField("Sixth Image Url", validators=[DataRequired(), URL()])
+    img_url_5 = StringField("Project Preview Url", validators=[DataRequired(), URL()])
+    img_url_6 = StringField("Add a # here", validators=[DataRequired(), URL()])
     submit = SubmitField("Add Project")
 
 # Configure Tables
