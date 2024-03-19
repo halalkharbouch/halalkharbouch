@@ -152,8 +152,8 @@ def admin_only(f):
 
 @app.route('/', methods=['GET'])
 def home():
-    # project_name = Project.query.all()[::-1][0].project_name.upper() or ''
-    project_name = 'CED UDUS ERP'
+    project_name = Project.query.all()[::-1][0].project_name.upper()
+    # project_name = 'CED UDUS ERP'
     return render_template('index.html', project_name=project_name)
 
 @app.route('/register', methods=['POST', 'GET'])
