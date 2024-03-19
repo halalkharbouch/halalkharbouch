@@ -17,7 +17,7 @@ import smtplib
 import os
 
 
-MY_EMAIL = os.environ.get('secret_key')
+MY_EMAIL = os.environ.get('my_email')
 MY_PASSWORD = os.environ.get('email_password')
 
 app = Flask(__name__)
@@ -26,7 +26,7 @@ Bootstrap(app)
 ckeditor = CKEditor(app)
 
 # Connect DB
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('database_uri')
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('new_db_uri')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
@@ -135,8 +135,8 @@ class Comment(db.Model):
     parent_post = relationship("BlogPost", back_populates="comments")
 
 
-# with app.app_context():
-#     db.create_all()
+with app.app_context():
+    db.create_all()
 
 
 def admin_only(f):
@@ -152,7 +152,8 @@ def admin_only(f):
 
 @app.route('/', methods=['GET'])
 def home():
-    project_name = Project.query.all()[::-1][0].project_name.upper()
+    # project_name = Project.query.all()[::-1][0].project_name.upper() or ''
+    project_name = 'CED UDUS ERP'
     return render_template('index.html', project_name=project_name)
 
 @app.route('/register', methods=['POST', 'GET'])
@@ -333,4 +334,4 @@ def unauthorised_page():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)
